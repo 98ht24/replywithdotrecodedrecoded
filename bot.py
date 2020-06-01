@@ -2,7 +2,7 @@ import os
 
 import discord
 
-from autoactions import puslowmode
+from autoactions import puslowmode, messagelog
 from chattriggers import setsetting, getsetting, addslowmode, onslowmode, helpcmd
 from startuptasks import startupmessage, setstatus
 
@@ -18,6 +18,7 @@ class Bot:
 
         self.autoactions = []
         self.autoactions.append(puslowmode.PUSlowMode("per user slow mode"))
+        self.autoactions.append(messagelog.MessageLog("Message Log"))
 
         self.chattriggers = []
         # self.chattriggers.append(replywithdot.ReplyWithDot("replywithdot", ["."], self.spamqueue))
