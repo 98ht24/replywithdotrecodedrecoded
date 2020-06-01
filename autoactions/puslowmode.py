@@ -18,7 +18,7 @@ class PUSlowMode(autoaction.AutoAction):
 
         sml = await persstorage.getdata(message.guild.id, "slowmodelist")
 
-        if sml == None:
+        if sml is None:
             await persstorage.setdata(message.guild.id, "slowmodelist", ".0,0")
             return
 
@@ -28,7 +28,7 @@ class PUSlowMode(autoaction.AutoAction):
 
         smt = await persstorage.getdata(message.guild.id, "slowmodetiming")
 
-        if smt == None:
+        if smt is None:
             await persstorage.setdata(message.guild.id, "slowmodetiming",
                                       ".0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0")
             return
@@ -48,7 +48,7 @@ class PUSlowMode(autoaction.AutoAction):
 
         for ic, i in enumerate(smla):
             # print(i)
-            if i == None:  # avoid errors? not sure if to deprecate
+            if i is None:  # avoid errors? not sure if to deprecate
                 continue
             # print(i[0])
             # print(message.author)

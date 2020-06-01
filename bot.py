@@ -3,8 +3,7 @@ import os
 import discord
 
 from autoactions import puslowmode
-from chattriggers import setsetting, getsetting, addslowmode, onslowmode
-from spamqueue import SpamQueue
+from chattriggers import setsetting, getsetting, addslowmode, onslowmode, helpcmd
 from startuptasks import startupmessage, setstatus
 
 
@@ -13,10 +12,8 @@ class Bot:
         self.token = token
         self.isbotaccount = isbotaccount
 
-        self.spamqueue = SpamQueue()
-
         self.startuptasks = []
-        self.startuptasks.append(startupmessage.StartUpMessage("Startup Message", self.spamqueue))
+        self.startuptasks.append(startupmessage.StartUpMessage("Startup Message"))
         self.startuptasks.append(setstatus.BotStatus("set bot status"))
 
         self.autoactions = []
@@ -24,10 +21,11 @@ class Bot:
 
         self.chattriggers = []
         # self.chattriggers.append(replywithdot.ReplyWithDot("replywithdot", ["."], self.spamqueue))
-        self.chattriggers.append(setsetting.SetSetting("setsetting", ["*set "], self.spamqueue))
-        self.chattriggers.append(getsetting.GetSetting("getsetting", ["*get "], self.spamqueue))
+        self.chattriggers.append(setsetting.SetSetting("setsetting", ["*set "]))
+        self.chattriggers.append(getsetting.GetSetting("getsetting", ["*get "]))
         self.chattriggers.append(addslowmode.AddSlowMode("add slow mode", ["*addslowmode ", "*asm "]))
         self.chattriggers.append(onslowmode.OnSlowMode("On slow Mode", ["*onslowmode", "*osm"]))
+        self.chattriggers.append(helpcmd.HelpCMD("Help Command", ["*help"]))
 
     def run(self):
         startuptasks = self.startuptasks
