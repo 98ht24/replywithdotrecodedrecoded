@@ -1,33 +1,32 @@
-import chattrigger
-
 import discord
 
+import chattrigger
 from persistentstorage.persstorage import PersistentStorage
 
+
 class OnSlowMode(chattrigger.ChatTrigger):
-	
-	async def run(self, message: discord.Message, trigger: str, client: discord.Client):
-		
-		persstorage = PersistentStorage(client)
 
-		returned = await persstorage.getdata(message.guild.id, "slowmodelist")
+    async def run(self, message: discord.Message, trigger: str, client: discord.Client):
+        persstorage = PersistentStorage(client)
 
-		smlist = returned.split(".")[1:]
-		print(smlist)
-		print(smlist)
-		userslist = [x.split(",")[0] for x in smlist]
-		timelist = [x.split(",")[1] for x in smlist]
-		print(userslist)
-		print(timelist)
+        returned = await persstorage.getdata(message.guild.id, "slowmodelist")
 
-		memberslist = [message.guild.get_member(int(x)) for x in userslist]
+        smlist = returned.split(".")[1:]
+        print(smlist)
+        print(smlist)
+        userslist = [x.split(",")[0] for x in smlist]
+        timelist = [x.split(",")[1] for x in smlist]
+        print(userslist)
+        print(timelist)
 
-		#combined = [f"{str(x)}, {y}" for x in memberslist for y in timelist]
-		combined = ""
-		for x, y in zip(memberslist, timelist):
-			print(x, y)
-			combined += f"{str(x)}, {y} | "
+        memberslist = [message.guild.get_member(int(x)) for x in userslist]
 
-		#combinedstr = " | ".join(combined)
+        # combined = [f"{str(x)}, {y}" for x in memberslist for y in timelist]
+        combined = ""
+        for x, y in zip(memberslist, timelist):
+            print(x, y)
+            combined += f"{str(x)}, {y} | "
 
-		await message.channel.send(combined)
+        # combinedstr = " | ".join(combined)
+
+        await message.channel.send(combined)

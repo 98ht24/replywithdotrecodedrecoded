@@ -1,7 +1,9 @@
-import startuptask
 import discord
+
+import startuptask
+
 
 class BotStatus(startuptask.StartUpTask):
 
-	async def run(self, client):
-		await client.change_presence(activity = discord.Activity(name = "help comamnd isnt implemented yet ;", type = 0))
+    async def run(self, client):
+        await client.change_presence(activity=discord.Activity(name="help comamnd isnt implemented yet ;", type=0))

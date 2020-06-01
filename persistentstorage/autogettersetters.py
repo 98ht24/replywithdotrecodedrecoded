@@ -1,5 +1,5 @@
 class PersistentStorage:
 
-	def __init__(self):
-		storages = []
-		storages.append("")
+    def __init__(self):
+        storages = []
+        storages.append("")
