@@ -6,10 +6,10 @@ import chattrigger
 class HelpCMD(chattrigger.ChatTrigger):
 
     async def run(self, message: discord.Message, trigger: str, client: discord.Client):
-        await message.channel.send('''  
-Help Command (a bit wip)
+        await message.channel.send('''
+```Help Command (a bit wip)
 
 Per-User Slowmode
 *asm @target [slowmode seconds timer] (adds slowmode to a user)
-*osm (shows the users on slowmode)
+*osm (shows the users on slowmode)```
 ''')
