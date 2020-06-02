@@ -9,7 +9,7 @@ class OnSlowMode(chattrigger.ChatTrigger):
     async def run(self, message: discord.Message, trigger: str, client: discord.Client):
         persstorage = PersistentStorage(client)
 
-        returned = await persstorage.getdata(message.guild.id, "slowmodelist")
+        returned = await persstorage.get_data(message.guild.id, "slowmodelist")
 
         smlist = returned.split(".")[1:]
         print(smlist)

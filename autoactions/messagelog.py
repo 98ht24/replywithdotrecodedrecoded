@@ -10,8 +10,8 @@ class MessageLog(autoaction.AutoAction):
 
     async def run(self, message, client):
         # print("loggingtriggered")
-        excludedchannels = [int(x) for x in os.environ.get("CHATLOG_EXCLUSION").split(",")]
-        if message.channel.id in excludedchannels: return  # some channels you dont want to log to avoid lag
+        excluded_channels = [int(x) for x in os.environ.get("CHATLOG_EXCLUSION").split(",")]
+        if message.channel.id in excluded_channels: return  # some channels you dont want to log to avoid lag
         # try:
         # print(f"{str(message.author)} in {str(message.channel)} in {str(message.guild)}: {message.content}")
         embed = discord.Embed(title=f"{str(message.author)} in {str(message.channel)} in {str(message.guild)}",
@@ -45,10 +45,9 @@ class MessageLog(autoaction.AutoAction):
             attachment = message.attachments[0]
             # print(type(attachment))
             # print(dir(attachment))
-            attachmentfile = await attachment.read()
-            imagemessage = await client.get_channel(int(os.environ.get("IMGLOGCHANNELID"))).send(
-                file=discord.File(io.BytesIO(attachmentfile), filename=attachment.filename))
-            embed.set_image(url=imagemessage.attachments[0].url)
+            attachment_file = await attachment.read()
+            image_message = await client.get_channel(int(os.environ.get("IMGLOGCHANNELID"))).send(
+                file=discord.File(io.BytesIO(attachment_file), filename=attachment.filename))
+            embed.set_image(url=image_message.attachments[0].url)
 
         await client.get_channel(int(os.environ.get("MSG_LOG_CHANNEL_ID"))).send(embed=embed)
-# except: passt

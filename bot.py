@@ -8,37 +8,37 @@ from startuptasks import startupmessage, setstatus
 
 
 class Bot:
-    def __init__(self, token, isbotaccount):
+    def __init__(self, token, is_bot_account):
         self.token = token
-        self.isbotaccount = isbotaccount
+        self.is_bot_account = is_bot_account
 
-        self.startuptasks = []
-        self.startuptasks.append(startupmessage.StartUpMessage("Startup Message"))
-        self.startuptasks.append(setstatus.BotStatus("set bot status"))
+        self.startup_tasks = []
+        self.startup_tasks.append(startupmessage.StartUpMessage("Startup Message"))
+        self.startup_tasks.append(setstatus.BotStatus("set bot status"))
 
-        self.autoactions = []
-        self.autoactions.append(puslowmode.PUSlowMode("per user slow mode"))
-        self.autoactions.append(messagelog.MessageLog("Message Log"))
+        self.auto_actions = []
+        self.auto_actions.append(puslowmode.PUSlowMode("per user slow mode"))
+        self.auto_actions.append(messagelog.MessageLog("Message Log"))
 
-        self.chattriggers = []
-        # self.chattriggers.append(replywithdot.ReplyWithDot("replywithdot", ["."], self.spamqueue))
-        self.chattriggers.append(setsetting.SetSetting("setsetting", ["*set "]))
-        self.chattriggers.append(getsetting.GetSetting("getsetting", ["*get "]))
-        self.chattriggers.append(addslowmode.AddSlowMode("add slow mode", ["*addslowmode ", "*asm "]))
-        self.chattriggers.append(onslowmode.OnSlowMode("On slow Mode", ["*onslowmode", "*osm"]))
-        self.chattriggers.append(helpcmd.HelpCMD("Help Command", ["*help"]))
-        self.chattriggers.append(listguilds.ListGuilds("List Guilds", ["*listguilds", "*lg"], owneronly=True))
+        self.chat_triggers = []
+        # self.chat_triggers.append(replywithdot.ReplyWithDot("replywithdot", ["."], self.spamqueue))
+        self.chat_triggers.append(setsetting.SetSetting("setsetting", ["*set "]))
+        self.chat_triggers.append(getsetting.GetSetting("getsetting", ["*get "]))
+        self.chat_triggers.append(addslowmode.AddSlowMode("add slow mode", ["*addslowmode ", "*asm "]))
+        self.chat_triggers.append(onslowmode.OnSlowMode("On slow Mode", ["*onslowmode", "*osm"]))
+        self.chat_triggers.append(helpcmd.HelpCMD("Help Command", ["*help"]))
+        self.chat_triggers.append(listguilds.ListGuilds("List Guilds", ["*listguilds", "*lg"], owneronly=True))
         # ^ We don't want random users finding out what guilds the bot is in. ^
 
     def run(self):
-        startuptasks = self.startuptasks
-        autoactions = self.autoactions
-        chattriggers = self.chattriggers
+        startup_tasks = self.startup_tasks
+        auto_actions = self.auto_actions
+        chat_triggers = self.chat_triggers
 
         class Client(discord.Client):
 
             async def on_ready(self):  # on ready
-                for i in startuptasks:
+                for i in startup_tasks:
                     self.loop.create_task(i.run(client))
 
             async def on_message(self, message):  # on message
@@ -46,10 +46,10 @@ class Bot:
                 if str(message.guild.id) == os.environ.get("EXCLUSIONSERVER"):
                     return
 
-                for i in autoactions:
+                for i in auto_actions:
                     self.loop.create_task(i.run(message, client))
 
-                for i in chattriggers:
+                for i in chat_triggers:
                     for ii in i.triggers:
                         if message.content.startswith(ii):
                             if not i.owneronly:
@@ -62,4 +62,4 @@ class Bot:
         self.client = Client()
         client = self.client
 
-#	client.run(self.token, bot = self.isbotaccount)
+        # client.run(self.token, bot = self.is_bot_account)

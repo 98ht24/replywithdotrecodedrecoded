@@ -19,6 +19,6 @@ class SetSetting(chattrigger.ChatTrigger):
             await message.channel.send("Invalid Syntax! The proper syntax is ,set [name] [value]!")
             return
         perstorage = PersistentStorage(client)
-        await perstorage.setdata(message.guild.id, args[1], args[2])
-        returned = await perstorage.getdata(message.guild.id, args[1])
+        await perstorage.set_data(message.guild.id, args[1], args[2])
+        returned = await perstorage.get_data(message.guild.id, args[1])
         await message.channel.send(f"Set value to {returned}")

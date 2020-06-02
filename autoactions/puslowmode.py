@@ -12,24 +12,24 @@ class PUSlowMode(autoaction.AutoAction):
         # print("triggered!!!!")
         persstorage = PersistentStorage(client)
         try:
-            mutedroleid = int(await persstorage.getdata(message.guild.id, "mutedroleid"))
+            mutedroleid = int(await persstorage.get_data(message.guild.id, "mutedroleid"))
         except:
             mutedroleid = None
 
-        sml = await persstorage.getdata(message.guild.id, "slowmodelist")
+        sml = await persstorage.get_data(message.guild.id, "slowmodelist")
 
         if sml is None:
-            await persstorage.setdata(message.guild.id, "slowmodelist", ".0,0")
+            await persstorage.set_data(message.guild.id, "slowmodelist", ".0,0")
             return
 
         # print(sml)
         sml = sml.split(".")[1:]  # oh
         smla = []
 
-        smt = await persstorage.getdata(message.guild.id, "slowmodetiming")
+        smt = await persstorage.get_data(message.guild.id, "slowmodetiming")
 
         if smt is None:
-            await persstorage.setdata(message.guild.id, "slowmodetiming",
+            await persstorage.set_data(message.guild.id, "slowmodetiming",
                                       ".0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0")
             return
 
@@ -74,7 +74,7 @@ class PUSlowMode(autoaction.AutoAction):
                     towrite = towrite[:-1]
                     # print(51)
 
-                    # await persstorage.setdata(message.guild.id, "slowmodetiming", towrite) # fix?
+                    # await persstorage.set_data(message.guild.id, "slowmodetiming", towrite) # fix?
 
                     return False
 
@@ -87,7 +87,7 @@ class PUSlowMode(autoaction.AutoAction):
                             towrite += smt[jc] + "."
                     towrite = towrite[:-1]
                     towrite = "." + towrite
-                    await persstorage.setdata(message.guild.id, "slowmodetiming", towrite)  # update lastmessagetime
+                    await persstorage.set_data(message.guild.id, "slowmodetiming", towrite)  # update lastmessagetime
                     # print(62) # for debugging
 
                     await message.author.add_roles(message.guild.get_role(mutedroleid))

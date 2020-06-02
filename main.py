@@ -29,7 +29,7 @@ for i in bots:
 loop = asyncio.get_event_loop()
 
 for i in bots:
-    loop.create_task(i.client.start(i.token, bot=i.isbotaccount))
+    loop.create_task(i.client.start(i.token, bot=i.is_bot_account))
 
 loop.run_forever()
 print("Done starting bots!")

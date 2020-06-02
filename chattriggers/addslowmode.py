@@ -17,12 +17,12 @@ class AddSlowMode(chattrigger.ChatTrigger):
         args = message.content.split(" ")
 
         if not len(args) == 3:
-            await message.channel.send("Invalid Syntax! The proper syntax is ,asm [@user] [slowmode seconds]!")
+            await message.channel.send("Invalid Syntax! The proper syntax is ,asm [@user] [Slow mode seconds]!")
             return
 
-        targetuser = message.mentions[0]
+        target_user = message.mentions[0]
 
-        perstorage = PersistentStorage(client)
+        per_storage = PersistentStorage(client)
 
-        await perstorage.appenddata(message.guild.id, "slowmodelist", f".{str(targetuser.id)},{args[2]}")
+        await per_storage.append_data(message.guild.id, "slowmodelist", f".{str(target_user.id)},{args[2]}")
         await message.channel.send("Done.")
