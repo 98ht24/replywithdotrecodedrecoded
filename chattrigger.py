@@ -5,7 +5,7 @@ class ChatTrigger:  # base class for when someone say something bot say somethin
         self.owneronly = owneronly
 
     def run(self, message, trigger, client):
-        message.channel.send("default")
+        pass
 
     def get_name(self):
         return self.name
