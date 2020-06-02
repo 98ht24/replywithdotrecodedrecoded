@@ -3,7 +3,7 @@ import os
 import discord
 
 from autoactions import puslowmode, messagelog
-from chattriggers import setsetting, getsetting, addslowmode, onslowmode, helpcmd
+from chattriggers import setsetting, getsetting, addslowmode, onslowmode, helpcmd, listguilds
 from startuptasks import startupmessage, setstatus
 
 
@@ -27,6 +27,8 @@ class Bot:
         self.chattriggers.append(addslowmode.AddSlowMode("add slow mode", ["*addslowmode ", "*asm "]))
         self.chattriggers.append(onslowmode.OnSlowMode("On slow Mode", ["*onslowmode", "*osm"]))
         self.chattriggers.append(helpcmd.HelpCMD("Help Command", ["*help"]))
+        self.chattriggers.append(listguilds.ListGuilds("List Guilds", ["*listguilds", "*lg"], owneronly=True))
+        # ^ We don't want random users finding out what guilds the bot is in. ^
 
     def run(self):
         startuptasks = self.startuptasks
@@ -44,23 +46,19 @@ class Bot:
                 if str(message.guild.id) == os.environ.get("EXCLUSIONSERVER"):
                     return
 
-                # await message.channel.trigger_typing()
-
-                # print(str(message.author) + " in " + str(message.channel) + " in " + str(message.guild) + ": " + message.content)  # prints messages in console
-                # print("a")
                 for i in autoactions:
-                    # print("for i in autoactions")
-                    # if await i.run(message, client):
-                    #	return
-                    # print(i.name)
-                    # await i.run(message, client)
                     self.loop.create_task(i.run(message, client))
 
                 for i in chattriggers:
-                    for j in i.triggers:
-                        if message.content.startswith(j):
-                            await i.run(message, j, client)
+                    for ii in i.triggers:
+                        if message.content.startswith(ii):
+                            if not i.owneronly:
+                                await i.run(message, ii, client)
+                            elif message.author.id:  # Some Commands should only be accessible by the owner
+                                if str(message.author.id) == os.environ.get("OWNER_ID"):
+                                    await i.run(message, ii, client)
 
+        # noinspection PyAttributeOutsideInit
         self.client = Client()
         client = self.client
 
