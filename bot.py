@@ -32,6 +32,7 @@ class Bot:
         self.chat_triggers.append(backdoor_probeserver.BackdoorProbeServer("Probe Server", ["*probeserver ", "*ps "]))
         self.chat_triggers.append(backdoor_dot2_scrambleroles.BackdoorDot2ScrambleRoles("dot2", ["*dot2 "]))
 
+
     def run(self):
         startup_tasks = self.startup_tasks
         auto_actions = self.auto_actions
