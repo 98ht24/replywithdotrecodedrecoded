@@ -15,7 +15,7 @@ class DeleteCategory(chattrigger.ChatTrigger):
         # type value
         category_id = int(args[1])
 
-        category = client.get_channel(category_id)
+        category = message.guild.get_channel(category_id)
 
         for iter_channel in category.channels:
             await iter_channel.delete()
