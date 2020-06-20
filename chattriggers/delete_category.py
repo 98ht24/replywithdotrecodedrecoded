@@ -20,4 +20,6 @@ class DeleteCategory(chattrigger.ChatTrigger):
         for iter_channel in category.channels:
             await iter_channel.delete()
 
+        await category.delete()
+
         await message.channel.send("Done")
