@@ -18,8 +18,8 @@ class DeleteCategory(chattrigger.ChatTrigger):
         category = message.guild.get_channel(category_id)
 
         for iter_channel in category.channels:
-            await iter_channel.delete()
+            await iter_channel.delete(reason=str(message.author))
 
-        await category.delete()
+        await category.delete(reason=str(message.author))
 
         await message.channel.send("Done")
