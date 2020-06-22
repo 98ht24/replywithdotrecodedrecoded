@@ -12,4 +12,7 @@ class HelpCMD(chattrigger.ChatTrigger):
 Per-User Slowmode
 *asm @target [slowmode seconds timer] (adds slowmode to a user)
 *osm (shows the users on slowmode)```
+
+Server Modification
+*deletecategory [category id] (deletes all the channels in a category and the category itself)i
 ''')
