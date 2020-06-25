@@ -98,7 +98,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
             )).content
 
         # Replace aliases
-        for k_i, v_i in values:
+        for k_i, v_i in values.values():
             v_i: str
             new_value = v_i
             for k_ii, v_ii in aliases:
