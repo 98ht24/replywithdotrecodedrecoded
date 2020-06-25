@@ -92,7 +92,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
         values = dict()
         # Fill up values
         for i in needed_values:
-            message.channel.send(f"Input {i}")
+            await message.channel.send(f"Input {i}")
             values[i] = (await client.wait_for(
                 "message", check=lambda x: x.author.id == message.author.id
             )).content
